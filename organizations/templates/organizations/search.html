@@ -4,4 +4,12 @@
 
     <p>Hello, search!</p>
 
+    {% for org in orgs %}
+        <ul>
+            <li><a href="{% url 'organizations:organization' org_id=org.id %}">{{ org.name }}</a></li>
+            <li>{{ org.description }}</li>
+            <li>{{ org.webpage }}</li>
+        </ul>
+    {% endfor %}
+
 {% endblock %}

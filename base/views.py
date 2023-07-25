@@ -9,3 +9,7 @@ def index(request):
 
 def about(reqeust):
     return render(reqeust, "base/about.html")
+
+
+def not_found(request):
+    return render(request, "base/not_found.html")

@@ -11,6 +11,12 @@
     </head>
     <body>
 
+        <div>
+            <a href="{% url 'base:index' %}">Home</a>
+            <a href="{% url 'user:profile' user_id=request.user.id %}">Profile</a>
+            <a href="{% url 'organizations:search' %}">Organizations</a>
+        </div>
+
         {% block content %}{% endblock %}
 
     </body>

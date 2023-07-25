@@ -2,6 +2,15 @@
 
 {% block content %}
 
-    <p>Hello, user {{ user_id }}</p>
+    <p>Hello, user {{ user.username }}!</p>
+
+    <div>
+        <ul>
+            <li>{{ user.id }}</li>
+            <li>{{ user.first_name }}</li>
+            <li>{{ user.last_name }}</li>
+            <li>{{ user.email }}</li>
+        </ul>
+    </div>
 
 {% endblock %}
