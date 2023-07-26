@@ -8,26 +8,32 @@
         <p>{{ org.webpage }}</p>
     </div>
 
-    <div>
-        <p>Ongoing fundraises:</p>
-        {% for fundraise in fundraises.ongoing %}
-            <ul>
-                <li>{{ fundraise.name }}</li>
-                <li>{{ fundraise.description }}</li>
-                <li>{{ fundraise.current_amount }} {{ org.currency_code }} / {{ fundraise.target_amount }} {{ org.currency_code }}</li>
-            </ul>
-        {% endfor %}
-    </div>
+    {% if connection %}
+        <div>
+            You are {{ connection.relation }} of this organization.
+        </div>
 
-    <div>
-        <p>Finished fundraises:</p>
-        {% for fundraise in fundraises.finished %}
-            <ul>
-                <li>{{ fundraise.name }}</li>
-                <li>{{ fundraise.description }}</li>
-                <li>{{ fundraise.target_amount }} {{ org.currency_code }}</li>
-            </ul>
-        {% endfor %}
-    </div>
+        <div>
+            <p>Ongoing fundraises:</p>
+            {% for fundraise in fundraises.ongoing %}
+                <ul>
+                    <li>{{ fundraise.name }}</li>
+                    <li>{{ fundraise.description }}</li>
+                    <li>{{ fundraise.current_amount }} {{ org.currency_code }} / {{ fundraise.target_amount }} {{ org.currency_code }}</li>
+                </ul>
+            {% endfor %}
+        </div>
+
+        <div>
+            <p>Finished fundraises:</p>
+            {% for fundraise in fundraises.finished %}
+                <ul>
+                    <li>{{ fundraise.name }}</li>
+                    <li>{{ fundraise.description }}</li>
+                    <li>{{ fundraise.target_amount }} {{ org.currency_code }}</li>
+                </ul>
+            {% endfor %}
+        </div>
+    {% endif %}
 
 {% endblock %}

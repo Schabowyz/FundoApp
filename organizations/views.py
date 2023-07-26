@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from .models import Fundraise, Organization
+from user.models import Connection
 
 # Create your views here.
 
@@ -13,17 +14,20 @@ def search(request):
 
 
 def organization(request, org_id):
+    context = {}
+
     try:
-        org = Organization.objects.get(id=org_id)
+        context["org"] = Organization.objects.get(id=org_id)
     except:
         return redirect(reverse("base:not_found"))
     
-    fundraises = {
-        "ongoing": Fundraise.objects.filter(organization=org, state="ongoing"),
-        "finished": Fundraise.objects.filter(organization=org, state="finished")
-    }
+    context["connection"] = Connection.objects.filter(user=request.user, organization=context["org"])
     
-    return render(request, "organizations/organization.html", {
-        "org": org,
-        "fundraises": fundraises
-    })
+    if context["connection"].exists():
+        context["connection"] = context["connection"][0]
+        context["fundraises"] = {
+            "ongoing": Fundraise.objects.filter(organization=context["org"], state="ongoing"),
+            "finished": Fundraise.objects.filter(organization=context["org"], state="finished")
+        }
+
+    return render(request, "organizations/organization.html", context)
