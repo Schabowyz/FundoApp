@@ -23,13 +23,12 @@ def organization(request, org_id):
         return redirect(reverse("base:not_found"))
     
     connections = Connection.getUserConnections(request.user)
+    fundraises, user_org_relation = None, None
     if connections:
         for connection in connections:
             if organization == connection.organization:
                 user_org_relation = connection
-                fundraises = Fundraise.getOrgsFundraises(organization)
-    else:
-        fundraises, user_org_relation = None, None
+                fundraises = Fundraise.getOrgsFundraises(organization)      
 
     return render(request, "organizations/organization.html", {
         "notifications": Notification.getUserNotifications(request.user),

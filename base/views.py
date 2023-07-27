@@ -13,7 +13,7 @@ def index(request):
 
 
 def about(request):
-    return render(reqeust, "base/about.html", {
+    return render(request, "base/about.html", {
         "notifications": Notification.getUserNotifications(request.user),
         "connections": Connection.getUserConnections(request.user)
     })
