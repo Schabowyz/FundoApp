@@ -8,9 +8,9 @@
         <p>{{ org.webpage }}</p>
     </div>
 
-    {% if connection %}
+    {% if user_org_relation %}
         <div>
-            You are {{ connection.relation }} of this organization.
+            You are {{ user_org_relation.relation }} of this organization.
         </div>
 
         <div>

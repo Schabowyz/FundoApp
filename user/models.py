@@ -16,6 +16,11 @@ class Connection(models.Model):
     relation = models.CharField(choices=RELATIONS, max_length=8)
     email = models.EmailField(max_length=256, unique=True)
 
+    def getUserConnections(user):
+        if user.is_authenticated:
+            return Connection.objects.filter(user=user)
+        return None
+
 
 class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -23,3 +28,8 @@ class Notification(models.Model):
     datetime = models.DateTimeField(default=timezone.now())
     seen = models.BooleanField(default=False)
     finished = models.BooleanField()
+
+    def getUserNotifications(user):
+        if user.is_authenticated:
+            return Notification.objects.filter(user=user)
+        return None

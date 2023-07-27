@@ -15,6 +15,32 @@
             <a href="{% url 'base:index' %}">Home</a>
             <a href="{% url 'user:profile' user_id=request.user.id %}">Profile</a>
             <a href="{% url 'organizations:search' %}">Organizations</a>
+            <ul>
+                Your organizations:
+                {% for connection in connections %}
+                    <ul>
+                        <li><a href="{% url 'organizations:organization' org_id=connection.organization.id %}">{{ connection.organization.name }}</a></li>
+                        <li>{{ connection.relation }}</li>
+                    </ul>
+                {% endfor %}
+            </ul>
+            <ul>
+                Notifications:
+                {% for notification in notifications %}
+                    <ul>
+                        <li>Notification about {{ notification.fundraise.name }} fundraise</li>
+                        <li>
+                            {% if notification.finished %}
+                                The fundraise if finished!
+                            {% else %}
+                                The fundraise is still going!
+                            {% endif %}
+                        </li>
+                        <li>{{ notification.datetime }}</li>
+                    </ul>
+                    <hr>
+                {% endfor %}
+            </ul>
         </div>
 
         {% block content %}{% endblock %}

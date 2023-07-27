@@ -57,6 +57,16 @@ class Fundraise(models.Model):
     target_amount = models.PositiveIntegerField()
     current_amount = models.PositiveIntegerField()
 
+    def getOrgsFundraises(organization):
+        fundraises = {"ongoing": [], "finished": []}
+        all_fundraises = Fundraise.objects.filter(organization=organization)
+        for fundraise in all_fundraises:
+            if fundraise.state == "ongoing":
+                fundraises["ongoing"].append(fundraise)
+            else:
+                fundraises["finished"].append(fundraise)
+        return fundraises
+
 
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
