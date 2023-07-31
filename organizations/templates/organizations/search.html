@@ -2,14 +2,34 @@
 
 {% block content %}
 
+
+
+    <style>
+
+
+
+
+    </style>
+
+
+
     <p>Hello, search!</p>
 
-    {% for org in orgs %}
-        <ul>
-            <li><a href="{% url 'organizations:organization' org_id=org.id %}">{{ org.name }}</a></li>
-            <li>{{ org.description }}</li>
-            <li>{{ org.webpage }}</li>
-        </ul>
-    {% endfor %}
+    
+
+    <div class="row row-cols-3 g-4">
+        {% for org in orgs %}
+        <div class="card-wrapper">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ org.name }}</h5>
+                    <p class="card-text">{{ org.description }}</p>
+                    <a href="{% url 'organizations:organization' org_id=org.id %}" class="btn btn-primary">Look into</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
